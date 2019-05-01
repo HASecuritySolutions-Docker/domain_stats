@@ -30,7 +30,7 @@ MAINTAINER Roy Sprague roy.sprague@gmail.com
                   | sort -u \
       )" \
       && apk add --virtual .rundeps $runDeps \
-      && apk del .build-deps \ 
+      && apk del .build-deps \
       && mkdir /var/log/domain_stats \
       && ln -sf /dev/stderr /var/log/domain_stats/domain_stats.log \
       && adduser -Ds /bin/sh domain_stats \
