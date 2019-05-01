@@ -2,12 +2,9 @@ FROM alpine
 
 MAINTAINER Roy Sprague roy.sprague@gmail.com
 
-RUN apk add --update --no-cache --virtual .build-deps \
+      RUN apk add --update --no-cache --virtual .build-deps \
       && apk add --no-cache --virtual .build-deps \
-        build-base \
-        git \
-        mercurial \
-        py2-pip \
+      && apk add --no-cache build-base git mercurial py2-pip \
       && apk add --update --no-cache python2 \
       && pip install PySocks \
       && pip install six \
@@ -16,7 +13,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
       && chmod +x pywhois/setup.py \
       && cd pywhois && python setup.py install && cd / \
       && rm -rf /pywhois \
-      && mkdir /opt && cd /opt && git clone https://github.com/MarkBaggett/domain_stats.git \
+      && cd /opt && git clone https://github.com/MarkBaggett/domain_stats.git \
       && wget http://s3.amazonaws.com/alexa-static/top-1m.csv.zip \
       && rm -rf /opt/domain_stats/top-1m.csv \
       && unzip -o top-1m.csv.zip -d /opt/domain_stats \
